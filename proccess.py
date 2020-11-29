@@ -1,6 +1,6 @@
-from config import bd as base
+#from config import bd as base
 
-import mysql.connector
+#import mysql.connector
 info = []
 
 #onectar en la BD
