@@ -39,3 +39,8 @@ def leer():
         print(contenido)
     
         return contenido
+
+#Borrar en Txt
+def borrar():
+    with open('test.txt', 'w') as f:
+        f.write("")

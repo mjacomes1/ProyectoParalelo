@@ -25,5 +25,10 @@ def consulta():
 
     return p.leer()
 
+@app.route('/borrar',methods=['GET'])
+def borrar():
+
+    return p.borrar()
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')  
