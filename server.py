@@ -16,9 +16,14 @@ def hello_world():
     close = request.values.get('close')
     volume  = request.values.get('volume')
 
-    p.insert(name,unix,date,symbol,open,high,low,close,volume,cur)
-
+    #p.insert(name,unix,date,symbol,open,high,low,close,volume,cur)
+    p.insert(name,unix,date,symbol,open,high,low,close,volume)
     return "Hola mundo"
 
+@app.route('/consulta',methods=['GET'])
+def consulta():
+
+    return p.leer()
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',debug=True)  
+    app.run(host='0.0.0.0')  
