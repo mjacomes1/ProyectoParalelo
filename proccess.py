@@ -12,8 +12,8 @@ def connectBD():
 #Insertar en Lista
 #def insert(name,unix,date,symbol,open,high,low,close,volume,cur):
 def insert(name,unix,date,symbol,open,high,low,close,volume):
+    threadLock.acquire()
     try:
-        threadLock.acquire() 
         if len(info) > 0:
             temp = []
             for i in info:
@@ -36,9 +36,11 @@ def escribir(line):
 
 #Leer en Txt
 def leer():
-    with open('test.txt', 'r') as f:
-        contenido = f.read()
-        print(contenido)
-    
-        return contenido
+    f = ''
+    for i in info:
+        for h in i:
+            f += str(h) + ' '
+        f += '\n'
+    return f
+        
 
