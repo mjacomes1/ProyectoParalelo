@@ -1,8 +1,8 @@
-#from config import bd as base
-
+#fromimport threading config import bd as base
+import threading
 #import mysql.connector
 info = []
-
+threadLock = threading.Lock() 
 #onectar en la BD
 def connectBD():
     conn = base.conectar()
@@ -12,7 +12,8 @@ def connectBD():
 #Insertar en Lista
 #def insert(name,unix,date,symbol,open,high,low,close,volume,cur):
 def insert(name,unix,date,symbol,open,high,low,close,volume):
-    try: 
+    try:
+        threadLock.acquire() 
         if len(info) > 0:
             temp = []
             for i in info:
@@ -26,6 +27,7 @@ def insert(name,unix,date,symbol,open,high,low,close,volume):
         #cur.execute()
         escribir(name+"\t"+unix+"\t"+date+"\t"+symbol+"\t"+open+"\t"+high+"\t"+low+"\t"+close+"\t"+volume+"\n")
         print("Inserto", identifier,"\n",len(info))
+    threadLock.release()
 #Escribir en Txt
 def escribir(line):
     f = open('test.txt','a')
@@ -40,7 +42,3 @@ def leer():
     
         return contenido
 
-#Borrar en Txt
-def borrar():
-    with open('test.txt', 'w') as f:
-        f.write("")
