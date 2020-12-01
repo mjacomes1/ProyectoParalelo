@@ -2,7 +2,7 @@ from flask import Flask, render_template,request
 import proccess as p
 app = Flask(__name__)
 
-#cur = p.connectBD()
+con,cur = p.connectBD()
 
 @app.route('/',methods=['GET'])
 def hello_world():
@@ -16,15 +16,17 @@ def hello_world():
     close = request.values.get('close')
     volume  = request.values.get('volume')
 
-    #p.insert(name,unix,date,symbol,open,high,low,close,volume,cur)
-    p.insert(name,unix,date,symbol,open,high,low,close,volume)
-    return "Hola mundo"
-
+    p.createThread(name,unix,date,symbol,open,high,low,close,volume,cur,con)
+    return "OK"
 @app.route('/consulta',methods=['GET'])
 def consulta():
+    resp = p.consulta(cur,con)
+    return "OK Consulto"+resp
 
-    return p.leer()
-
+@app.route('/eliminar',methods=['GET'])
+def eliminar():
+    resp = p.eliminar(cur,con)
+    return "OK Elimino"+resp
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')  
+    app.run(host='0.0.0.0',debug=True)  
