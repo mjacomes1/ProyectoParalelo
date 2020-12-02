@@ -21,12 +21,22 @@ def hello_world():
 @app.route('/consulta',methods=['GET'])
 def consulta():
     resp = p.consulta(cur,con)
-    return "OK Consulto"+resp
+    return "OK Consulto"+str(resp)
+
+@app.route('/consultaU',methods=['GET'])
+def consultaU():
+    resp = p.consultaUnix(cur,con)
+    return "OK Consulto Unix "+str(resp)
 
 @app.route('/eliminar',methods=['GET'])
 def eliminar():
     resp = p.eliminar(cur,con)
-    return "OK Elimino"+resp
+    return "OK Elimino"+str(resp)
+
+@app.route('/cerrar',methods=['GET'])
+def cerrar():
+    con.close()
+    return "OK"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)  

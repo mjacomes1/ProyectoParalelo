@@ -77,3 +77,18 @@ def consulta(cur,con):
     except Exception as identifier:
         print("Error",identifier)
 
+def consultaUnix(cur,con):
+    try:
+        cur.execute("select unix,count(unix) from proyecto group by unix HAVING count(unix) >= 2")
+        rows = cur.fetchall()
+        cont = 0
+        # Do stuff with the data
+        for row in rows:
+            cont+=1
+            print("___  = ___ ")
+            print ("Unix = {} ".format(row[0]))
+            print ("Cantidad = {}".format(row[1]))
+        print("Total",cont)
+        return cont
+    except Exception as identifier:
+        print("Error",identifier)
