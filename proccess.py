@@ -2,7 +2,6 @@ from config import bd as base
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import numpy as np
-import mysql.connector
 import threading
 
 info = np.empty(shape=[0])
